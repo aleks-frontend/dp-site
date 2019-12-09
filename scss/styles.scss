@@ -1,0 +1,22 @@
+$base-font: 16px;
+$red: #A52A2A;
+$white: #fff;
+
+body {
+    margin: 0;
+    font-size: $base-font;
+    background: $red;
+    color: $white;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+    &__inner {
+        max-width: 500px;
+        text-align: center;
+    }
+}
