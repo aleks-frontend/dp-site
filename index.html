@@ -5,16 +5,88 @@
     <meta charset="UTF-8">
     <title>DP Solutions | Home</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="favicon.ico" />
 </head>
 
 <body>
     <div class="hero">
-        <div class="hero__inner">
-            <h1>Welcome</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis harum laborum, 
-                tempora ut iusto sed molestias repudiandae, obcaecati exercitationem voluptas ipsa totam odio eos magni nisi error, omnis architecto suscipit?</p>
+        <div class="clock__wrapper clock__wrapper--usa">
+            <div class="clock__shadow"></div>
+            <div class="clock clock--usa js-clock-usa">
+                <div class="clock__inner">
+                    <div class="clock__center"></div>
+                    <div class="clock__hand clock__hand--seconds js-clock-hand-seconds"></div>
+                    <div class="clock__hand clock__hand--minutes js-clock-hand-minutes"></div>
+                    <div class="clock__hand clock__hand--hours js-clock-hand-hours"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clock__wrapper clock__wrapper--au">
+            <div class="clock__shadow"></div>
+            <div class="clock clock--au js-clock-au">
+                <div class="clock__inner">
+                    <div class="clock__center"></div>
+                    <div class="clock__hand clock__hand--seconds js-clock-hand-seconds"></div>
+                    <div class="clock__hand clock__hand--minutes js-clock-hand-minutes"></div>
+                    <div class="clock__hand clock__hand--hours js-clock-hand-hours"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clock__wrapper clock__wrapper--md">
+            <div class="clock__shadow"></div>
+            <div class="clock clock--md js-clock-md">
+                <div class="clock__inner">
+                    <div class="clock__center"></div>
+                    <div class="clock__hand clock__hand--seconds js-clock-hand-seconds"></div>
+                    <div class="clock__hand clock__hand--minutes js-clock-hand-minutes"></div>
+                    <div class="clock__hand clock__hand--hours js-clock-hand-hours"></div>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+        function setDate(target, difference) {
+            const clock = document.querySelector(target);
+            const secondHand = clock.querySelector('.js-clock-hand-seconds');
+            const minuteHand = clock.querySelector('.js-clock-hand-minutes');
+            const hourHand = clock.querySelector('.js-clock-hand-hours');
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            let hours = now.getHours() + difference;
+
+            if ( seconds === 59 ) {
+                secondHand.style.transition = 'none';
+            } else if ( seconds === 1 ) {
+                secondHand.style.transition = 'all 0.05s';
+                secondHand.style.transitionTimingFunction = 'cubic-bezier(0.1, 2.7, 0.58, 1)';
+            }
+
+            const secondDegrees = ( ( seconds / 60 ) * 360 ) + 90;
+            const minuteDegrees = ( ( minutes / 60 ) * 360 ) + 90;
+            
+            if ( hours > 24 ) hours = hours - 24;
+            if ( hours > 12 ) hours = hours - 12;
+            const hourDegrees = ( ( hours / 12 ) * 360 ) + 90;
+            
+            secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+            secondHand.style.display = 'block';
+            minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
+            minuteHand.style.display = 'block';
+            hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+            hourHand.style.display = 'block';
+        }
+
+        setDate('.js-clock-usa', -6);
+        setDate('.js-clock-au', 10);
+        setDate('.js-clock-md', 2);
+        
+        setInterval(() => {
+            setDate('.js-clock-usa', -6);
+            setDate('.js-clock-au', 10);
+            setDate('.js-clock-md', 2);
+        }, 1000);
+    </script>
 </body>
 
 </html>
