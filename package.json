@@ -24,7 +24,7 @@
   "homepage": "https://github.com/aleks-frontend/playground-boilerplate#readme",
   "description": "",
   "dependencies": {
-    "npm": "^6.8.0",
+    "npm": "^6.14.6",
     "sass": "^1.23.7"
   }
 }
